@@ -38,9 +38,11 @@ const Profile = () => {
         for(const key in updatedInfo) {
           formData.append(key, updatedInfo[key]);
         }
-        const res = await axios.put(`http://localhost:5050/api/user/update`, {
-          data: updatedInfo,
-        });
+        const res = await axios.put(`https://studynotion-backend-be2f.onrender.com/api/user/update`,
+          {
+            data: updatedInfo,
+          }
+        );
         console.log(res)
         dispatch(setUser(res.data.data));
         toast.success("Profile Updated Successfully");

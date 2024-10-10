@@ -28,7 +28,7 @@ const SignUp = () => {
     e.preventDefault();
     try{
       dispatch(setLoading(true));
-      const res = await axios.post('http://localhost:5050/api/user/register' , userInfo , {
+      const res = await axios.post('https://studynotion-backend-be2f.onrender.com/api/user/register' , userInfo , {
         headers : {
           'Content-Type' : 'multipart/form-data'
         }

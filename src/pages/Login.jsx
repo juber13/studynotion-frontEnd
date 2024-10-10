@@ -14,7 +14,9 @@ const Login = () => {
   
   const handleLogin = async() => {
      try{
-       const res = await axios.post('http://localhost:5050/api/user/login',userInfo);
+       const res = await axios.post("https://studynotion-backend-be2f.onrender.com/api/user/login",
+         userInfo
+       );
        dispatch(setUser(res.data.data));
        toast.success('Login Successfully');
        setUserInfo({email: '',password: ''});

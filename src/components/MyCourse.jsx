@@ -14,7 +14,8 @@ const MyCourse = () => {
   const getInstructorCourses = async() => {
     try{
        dispatch(setLoading(true));
-      const res = await axios.get(`http://localhost:5050/api/course/getInstructorCourse`); 
+      const res = await axios.get(`https://studynotion-backend-be2f.onrender.com/api/course/getInstructorCourse`
+      ); 
       setCourses(res.data.data)
       dispatch(setLoading(false));
     }catch(err){
@@ -32,7 +33,7 @@ const MyCourse = () => {
   const makeCoursePublished = async(courseId) => {
     try{
       dispatch(setLoading(true));
-      await axios.patch(`http://localhost:5050/api/course/makeCoursePublished/${courseId}`);
+      await axios.patch(`https://studynotion-backend-be2f.onrender.com/api/course/makeCoursePublished/${courseId}`);
       getInstructorCourses();
       toast.success("Course Published Successfully")
       dispatch(setLoading(false));  

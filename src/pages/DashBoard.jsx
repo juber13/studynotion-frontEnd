@@ -129,7 +129,7 @@ const DashBoard = () => {
         </ul>
       </div>
 
-      <div className='w-[calc(100%-300px)] ml-[300px] mt-10'>
+      <div className='w-[calc(100%-300px)] ml-[300px] mt-10' key={Math.random() * 100}>
         {myComponents.map((item) => {
           if (item[currentComponent]) {
             return item[currentComponent];

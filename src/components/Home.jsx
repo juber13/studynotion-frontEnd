@@ -18,7 +18,7 @@ const Home = () => {
     const getAllCourses = async () => {
       try {
         dispatch(setLoading(true));
-        const res = await axios.get(`http://localhost:5050/api/course/getCourse`);
+        const res = await axios.get(`https://studynotion-backend-be2f.onrender.com/api/course/getCourse`);
         console.log(res.data.data);
         setCourses(res.data.data);
         dispatch(setLoading(false));
