@@ -14,8 +14,16 @@ const Login = () => {
   
   const handleLogin = async() => {
      try{
-       const res = await axios.post("https://studynotion-backend-be2f.onrender.com/api/user/login",
-         userInfo
+       const res = await axios.post(
+         "https://studynotion-backend-be2f.onrender.com/api/user/login",
+         userInfo,
+         {
+           headers: {
+             "Content-Type": "application/json",
+           },
+           withCredentials: true,
+           credentials: "include",
+         }
        );
        dispatch(setUser(res.data.data));
        toast.success('Login Successfully');

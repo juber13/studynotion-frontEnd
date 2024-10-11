@@ -2,18 +2,18 @@ import React, { useState } from 'react'
 
 import toast from "react-hot-toast";
 import { setLoading , setUser } from "../store/userSlice";
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import axios from "axios";
 import { FaEdit } from 'react-icons/fa';
 
 axios.defaults.withCredentials = true;
 
-import { useSelector } from 'react-redux';
 import { Form } from 'react-router-dom';
+
 
 const Profile = () => {
     const  user  = useSelector((state) => state.user.data);
-    const { name, phoneNumber, isActive, email, role, lastName , imageUrl } = user;
+    const { name, phoneNumber, isActive, email, role, lastName , imageUrl , loading,  } = user;
     const [isEditMode, setIsEditMode] = useState(false);
     const [updatedInfo, setUpdatedInfo] = useState({
       name: "",
@@ -21,6 +21,7 @@ const Profile = () => {
       lastName: "",
       imageUrl: "",
     });
+
 
     const dispatch = useDispatch();
 
@@ -34,6 +35,7 @@ const Profile = () => {
     const handleUpdate = async (e) => {
       e.preventDefault();
       try {
+        dispatch(setLoading(true));
         const formData  = new FormData();
         for(const key in updatedInfo) {
           formData.append(key, updatedInfo[key]);
@@ -47,9 +49,11 @@ const Profile = () => {
         dispatch(setUser(res.data.data));
         toast.success("Profile Updated Successfully");
         setIsEditMode(false); 
+          dispatch(setLoading(false));
       } catch (error) {
         console.log(error);
         toast.error(error.response.data.error);
+        dispatch(setLoading(false));
       }
     }; 
 
@@ -61,7 +65,7 @@ const Profile = () => {
   return (
     <>
       {isEditMode ? (
-        <div className='edit-from mt-20 border p-5 flex-start'>
+        <div className='edit-from mt-20 border p-5 flex-start max-w-5xl'>
           <div className='heading flex items-center justify-between w-full'>
             <h2 className='text-2xl ml-3 font-semibold'>Edit Profile</h2>
             <div
@@ -76,23 +80,34 @@ const Profile = () => {
             onSubmit={handleUpdate}
           >
             <div className='flex flex-col gap-2'>
-              <label htmlFor='lastName'>Profile Picture</label>
-              <input
-                type='file'
-                placeholder='lastName'
-                name='imageUrl'
-                className='p-1 border rounded-md'
-                onChange={handleFileChange}
-              />
+                  Profile Image
+              <div className='flex items-center border rounded-md'>
+                <label className='flex items-center cursor-pointer bg-slate-500 text-white px-4 p-2 text-sm placeholder:text-xs rounded-md hover:bg-slate-700'>
+                  <input
+                    type='file'
+                    className='hidden'
+                    name='imageUrl'
+                    onChange={(e) => {
+                      handleFileChange(e);
+                      const fileName = e.target.files[0]?.name || "No file chosen";
+                        document.getElementById("image-file").textContent =fileName;
+                    }}
+                  />
+                  Choose image
+                </label>
+                <span className='ml-4 text-gray-700' id='image-file'>
+                  No file chosen
+                </span>
+              </div>
             </div>
 
             <div className='flex flex-col gap-2'>
               <label htmlFor='lastName'>Name</label>
               <input
                 type='text'
-                placeholder='lastName'
+                placeholder='Name'
                 name='name'
-                className='p-1 border rounded-md'
+                className='p-1 border rounded-md placeholder:text-sm outline-none '
                 value={updatedInfo.name}
                 onChange={handleChange}
               />
@@ -104,7 +119,7 @@ const Profile = () => {
                 type='text'
                 placeholder='lastName'
                 name='lastName'
-                className='p-1 border rounded-md'
+                className='p-1 border rounded-md placeholder:text-sm outline-none '
                 value={updatedInfo.lastName}
                 onChange={handleChange}
               />
@@ -114,20 +129,22 @@ const Profile = () => {
               <label htmlFor='phone'>Phone Number</label>
               <input
                 type='text'
-                placeholder='lastName'
+                placeholder='phoneNumber'
                 name='phoneNumber'
-                className='p-1 border rounded-md'
+                className='p-1 border rounded-md placeholder:text-sm outline-none '
                 value={updatedInfo.phoneNumber}
                 onChange={handleChange}
               />
             </div>
 
+            <div>
             <button
-              className='border p-2 mt-3 rounded-md bg-green-500 text-white font-semibold'
+              className='border p-2 flex flex-start mt-3 text-sm rounded-md bg-green-500 text-white font-semibold'
               type='submit'
             >
-              Update Details
+             {loading ? "Loading..." : "Update"}  
             </button>
+            </div>
           </form>
         </div>
       ) : (

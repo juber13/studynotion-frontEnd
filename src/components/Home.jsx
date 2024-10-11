@@ -73,7 +73,7 @@ const Home = () => {
       </div>
       <div className='my-course mt-3 mb-10 w-[90%'>
         <h3 className='text-2xl font-semibold text-center text-slate-600'>Trending Courses</h3>
-        <div className='flex items-center gap-3 mt-3 p-4'> 
+      <div className='flex items-center flex-wrap gap-3 mt-3 p-4'> 
           {courses?.map((course) => <Card key={course._id} course={course} />)}
         </div>
       </div>

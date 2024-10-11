@@ -40,7 +40,7 @@ const AddCourses = () => {
       for(let key in courseDetails){
         formData.append(key , courseDetails[key])
       }
-      const res = await axios.post(`https://studynotion-backend-be2f.onrender.com/api/course/uploadCourse`,formData);
+      const res = await axios.post(`http://localhost:5050/api/course/uploadCourse`, formData);
       toast.success("Course Uploaded Successfully")
       for(let key in courseDetails){
         setCourseDetails({...courseDetails , [key] : ""})
