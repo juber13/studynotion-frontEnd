@@ -3,31 +3,29 @@ import { Link , useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
-import { useDispatch } from 'react-redux';
-import { setUser, setToken } from '../store/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser, setToken , setLoading } from '../store/userSlice';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import axiosInstance from '../../utils/axiosInstance';
+import { LOG_IN } from '../../utils/restEndPoints';
 const Login = () => {
   const [userInfo, setUserInfo] = useState({email: '',password: ''});
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isToggle , setIsToggle] = useState(false); 
+  const {loading}  = useSelector((state) => state.user);
+  console.log(loading);
   
   const handleLogin = async() => {
      try{
-       const res = await axios.post(
-         "https://studynotion-backend-be2f.onrender.com/api/user/login",
-         userInfo,
-         {
-           headers: {
-             "Content-Type": "application/json",
-           },
-           withCredentials: true,
-           credentials: "include",
-         }
-       );
-       dispatch(setUser(res.data.data));
+       dispatch(setLoading(true));
+       const res = await axiosInstance.post(LOG_IN,userInfo);
+
+       Cookies.set("token" , res.data.data.token);  
+       dispatch(setUser(res.data.data._doc));
        toast.success('Login Successfully');
        setUserInfo({email: '',password: ''});
+       dispatch(setLoading(false));
        navigate('/');
      }catch(error){
        console.log(error);  
@@ -53,7 +51,7 @@ const Login = () => {
 
       <div className='flex items-center justify-between border rounded-md p-2'>
         <input
-          type={isToggle ? 'text' : 'password'}
+          type={isToggle ? "text" : "password"}
           className='rounded-md outline-none p-2 flex-1 text-sm placeholder:text-lg'
           placeholder='Password'
           onChange={(e) =>
@@ -66,13 +64,12 @@ const Login = () => {
             className='text-xl cursor-pointer'
             onClick={() => setIsToggle(!isToggle)}
           />
-        ) : ( 
+        ) : (
           <AiOutlineEye
             className='text-xl cursor-pointer'
             onClick={() => setIsToggle(!isToggle)}
           />
-        )
-       }
+        )}
       </div>
       <div className='grid grid-cols-1 gap-3'>
         <div className='w-full flex justify-between'>
@@ -90,7 +87,7 @@ const Login = () => {
           className='bg-green-500 p-2 rounded-md text-white font-semibold shadow-lg text-sm'
           onClick={handleLogin}
         >
-          Login
+          {loading ? "logging..." : "Login"}
         </button>
       </div>
     </div>

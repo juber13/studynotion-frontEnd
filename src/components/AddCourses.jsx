@@ -5,6 +5,9 @@ import { setLoading } from '../store/userSlice';
 
 import { useSelector , useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
+import {UPLOAD_COURSES} from '../../utils/restEndPoints'; 
+import axiosInstance from '../../utils/axiosInstance';
+
 const AddCourses = () => {
   const {loading} = useSelector(state => state.user);
   const dispatch = useDispatch();
@@ -24,6 +27,7 @@ const AddCourses = () => {
   // Check if files are selected
   if (files.length > 0) {
     const file = files[0];
+    console.log(file);  
     setCourseDetails(prevDetails => ({
       ...prevDetails,
       [name]: file // Dynamically set the thumbnail or video based on input name
@@ -31,7 +35,7 @@ const AddCourses = () => {
   }
 };
 
-  const handleVideoUpload = async(e) => {
+  const uploadCourse = async(e) => {
     e.preventDefault();
 
     try{
@@ -40,7 +44,7 @@ const AddCourses = () => {
       for(let key in courseDetails){
         formData.append(key , courseDetails[key])
       }
-      const res = await axios.post(`http://localhost:5050/api/course/uploadCourse`, formData);
+      const res = await axiosInstance.post(UPLOAD_COURSES, formData);
       toast.success("Course Uploaded Successfully")
       for(let key in courseDetails){
         setCourseDetails({...courseDetails , [key] : ""})
@@ -61,7 +65,7 @@ const AddCourses = () => {
     <div className='mt-20'>
       <h2 className='text-2xl text-slate-500 font-semibold '> Upload Course</h2>
       <div className='max-w-5xl mt-10 border p-10'>
-        <form className='grid grid-cols-2 gap-4' onSubmit={handleVideoUpload}>
+        <form className='grid grid-cols-2 gap-4' onSubmit={uploadCourse}>
           <input
             type='text'
             placeholder='Course Title'

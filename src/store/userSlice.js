@@ -20,7 +20,7 @@ import { createSlice } from "@reduxjs/toolkit";
         state.error = action.payload;
       },
       setLogout: (state , action) => {
-        state.user = null;
+        state.data = null;
         state.loading = false;
         state.error = null;
       } 

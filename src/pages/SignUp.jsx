@@ -4,6 +4,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useSelector , useDispatch } from 'react-redux'
 import { setLoading } from '../store/userSlice'
+import { SIGN_IN } from '../../utils/restEndPoints'
+import axiosInstance from '../../utils/axiosInstance'
 
 const SignUp = () => {
   const [userInfo , setUserInfo] = useState({name : "" , lastName : "" , imageUrl : "", email : "" , password : "" , phoneNumber : "" , confirmPassword : "" , role : ""});
@@ -28,11 +30,7 @@ const SignUp = () => {
     e.preventDefault();
     try{
       dispatch(setLoading(true));
-      const res = await axios.post('https://studynotion-backend-be2f.onrender.com/api/user/register' , userInfo , {
-        headers : {
-          'Content-Type' : 'multipart/form-data'
-        }
-      });
+      const res = await axiosInstance.post(SIGN_IN, userInfo);
       Object.keys(userInfo).forEach(key => userInfo[key] = "");
       toast.success(res.data.message)
       dispatch(setLoading(false));

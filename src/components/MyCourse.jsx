@@ -1,21 +1,30 @@
 import React, { useEffect ,useState } from 'react'
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '../store/userSlice';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import axiosInstance from '../../utils/axiosInstance';
+import { GET_INSTRUCTOR_COURSES , MAKE_COURSE_PUBLISHED } from '../../utils/restEndPoints';
+
 
 
 const MyCourse = () => {
   const [courses , setCourses] = useState([]);
   const dispatch = useDispatch();
+    const { loading } = useSelector((state) => state.user);
+
   
   // get all courses which are published by instructor
   const getInstructorCourses = async() => {
     try{
        dispatch(setLoading(true));
-      const res = await axios.get(`https://studynotion-backend-be2f.onrender.com/api/course/getInstructorCourse`
-      ); 
+      const res = await axiosInstance.get(GET_INSTRUCTOR_COURSES, {
+        headers: {
+          "Content-Type": "application/json",
+          withCredentials:true
+        },
+      }); 
       setCourses(res.data.data)
       dispatch(setLoading(false));
     }catch(err){
@@ -33,7 +42,8 @@ const MyCourse = () => {
   const makeCoursePublished = async(courseId) => {
     try{
       dispatch(setLoading(true));
-      await axios.patch(`https://studynotion-backend-be2f.onrender.com/api/course/makeCoursePublished/${courseId}`);
+      await axiosInstance.patch(`${MAKE_COURSE_PUBLISHED}/${courseId}` , {withCredentials : true})
+
       getInstructorCourses();
       toast.success("Course Published Successfully")
       dispatch(setLoading(false));  
@@ -47,6 +57,7 @@ const MyCourse = () => {
     <div className='flex flex-wrap flex-col gap-10 justify-center items-center mt-10 pb-12'>
       {courses.length > 0 && <h3>My Courses</h3>}
       <div className='flex w-[90%] gap-3'>
+        {loading && <h3>Loading Courses...</h3>}
         {courses.length === 0 ? (
           <div className='text-center text-slate-300 text-3xl flex items-center justify-center w-full height'>
             No Courses Found

@@ -8,6 +8,9 @@ import { setLoading } from '../store/userSlice';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import Card from './Card';
+import { GET_ALL_COURSES } from "../../utils/restEndPoints";
+import axiosInstance from '../../utils/axiosInstance';
+
 
 const Home = () => {
   // const token = Cookies.get('token');
@@ -18,7 +21,7 @@ const Home = () => {
     const getAllCourses = async () => {
       try {
         dispatch(setLoading(true));
-        const res = await axios.get(`https://studynotion-backend-be2f.onrender.com/api/course/getCourse`);
+        const res = await axiosInstance.get(GET_ALL_COURSES);
         console.log(res.data.data);
         setCourses(res.data.data);
         dispatch(setLoading(false));

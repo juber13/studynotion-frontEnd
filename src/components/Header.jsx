@@ -7,10 +7,9 @@ import { setLogout } from "../store/userSlice";
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userInfo = useSelector((state) => state.user.data);
   const token = Cookies.get("token"); 
+  console.log(token)
 
   
   return (
@@ -53,7 +52,7 @@ const Header = () => {
         <Link to='#courses' className="hover:text-green-600">Courses</Link>
       </div>
 
-      {!userInfo ? (
+      {!token ? (
         <div className='flex gap-3'>
           <Link
             to='/login'

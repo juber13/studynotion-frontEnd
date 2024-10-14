@@ -5,7 +5,8 @@ import { setLoading , setUser } from "../store/userSlice";
 import { useDispatch , useSelector} from 'react-redux';
 import axios from "axios";
 import { FaEdit } from 'react-icons/fa';
-
+import axiosInstance from '../../utils/axiosInstance';
+import { UPDATE_USER_PROFILE } from '../../utils/restEndPoints';
 axios.defaults.withCredentials = true;
 
 import { Form } from 'react-router-dom';
@@ -40,7 +41,7 @@ const Profile = () => {
         for(const key in updatedInfo) {
           formData.append(key, updatedInfo[key]);
         }
-        const res = await axios.put(`https://studynotion-backend-be2f.onrender.com/api/user/update`,
+        const res = await axiosInstance.put(UPDATE_USER_PROFILE,
           {
             data: updatedInfo,
           }

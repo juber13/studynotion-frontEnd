@@ -34,12 +34,13 @@ const DashBoard = () => {
     const { role } = useSelector((state) => state.user.data);
     
 
-    // const handleLogout = () => {
-    //   Cookies.remove('token', { path: '/' });
-    //   toast.success("Logout Successfully"); 
-    //   dispatch(setLogout(null));
-    //   navigate("/login");
-    // };
+    const handleLogout = () => {
+      Cookies.remove('token', { path: '/' });
+      toast.success("Logout Successfully"); 
+      localStorage.removeItem("persist:root");  
+      dispatch(setLogout(null));
+      navigate("/login");
+    };
 
 
   return (
@@ -122,7 +123,7 @@ const DashBoard = () => {
             Setting
           </li>
 
-          <li className='p-2 w-full text-center hover:bg-gray-100 cursor-pointer' onClick={() => localStorage.removeItem('persist:root')}>
+          <li className='p-2 w-full text-center hover:bg-gray-100 cursor-pointer' onClick={handleLogout}>
             <HiOutlineLogout className='inline-block mr-2' />
             Logout
           </li>
