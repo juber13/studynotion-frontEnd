@@ -5,8 +5,6 @@ const axiosInstance = axios.create({
     baseURL : `${import.meta.env.VITE_BACKEND_BASE_URL}/api`,
 });
 
-
-
 // Request interceptor to add the JWT token to the Authorization header
 axiosInstance.interceptors.request.use((config) => {
     const token = Cookies.get('token');

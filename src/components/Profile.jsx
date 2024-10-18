@@ -50,7 +50,7 @@ const Profile = () => {
         dispatch(setUser(res.data.data));
         toast.success("Profile Updated Successfully");
         setIsEditMode(false); 
-          dispatch(setLoading(false));
+        dispatch(setLoading(false));
       } catch (error) {
         console.log(error);
         toast.error(error.response.data.error);
@@ -143,7 +143,7 @@ const Profile = () => {
               className='border p-2 flex flex-start mt-3 text-sm rounded-md bg-green-500 text-white font-semibold'
               type='submit'
             >
-             {loading ? "Loading..." : "Update"}  
+             {loading ? "Updating..." : "Update"}  
             </button>
             </div>
           </form>

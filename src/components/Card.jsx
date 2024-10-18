@@ -8,13 +8,13 @@ const Card = ({course}) => {
   return (
     <div
       key={course._id}
-      className='w-[250px] border-green-200 border-2 overflow-hidden flex flex-col h-[320px] p-2 items-center gap-2  rounded-lg shadow-lg bg-white transition-transform transform hover:scale-105'
+      className='w-[250px] border-slate-200 border-2 overflow-hidden flex flex-col h-[320px] p-2  items-center gap-2  rounded-lg shadow-lg bg-white transition-transform transform hover:scale-105'
     >
       <div className=''>
         <img
           src={course.thumbnail}
           alt={course.courseName}
-          className=' rounded-t-lg h-[100px] w-full object-contain'
+          className=' rounded-t-lg h-[90px] w-full object-contain'
         />
       </div>
 
@@ -37,7 +37,7 @@ const Card = ({course}) => {
         </p> */}
       </div>
 
-      <button className='bg-green-500 w-[90%] text-white p-2 text-sm rounded-b-lg hover:bg-green-600 transition duration-200'>
+      <button className='w-[90%] text-blue-600 font-semibold border p-2 text-sm  rounded-md bg-slate-100 transition duration-200'>
         Buy Now
       </button>
     </div>

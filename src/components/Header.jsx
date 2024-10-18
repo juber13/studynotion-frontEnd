@@ -29,21 +29,19 @@ const Header = () => {
           className='flex items-center relative cursor-pointer hover:text-green-600'
           onClick={() => setToggle(!toggle)}
         >
-          Catalog
+          Category
           <BiCaretDown />
           <ul
-            className={`absolute top-8 bg-gray-200 p-3 ${
-              toggle ? "block" : "hidden"
-            }`}
+            className={`absolute top-10 bg-white-600 border shadow-md rounded-sm p-3 ${ toggle ? "block" : "hidden"}`}
           >
             <Link to='/'>
-              <li className='hover:text-white text-sm'>Home</li>
+              <li className='hover:text-green-500 font-[300] text-sm'>FrontEnd</li>
             </Link>
             <Link to='/about'>
-              <li className='hover:text-white text-sm'>About</li>
+              <li className='hover:text-green-500 font-[300] text-sm'>Backend</li>
             </Link>
             <Link to='/contact'>
-              <li className='hover:text-white text-sm'>Details</li>
+              <li className='hover:text-green-500 font-[300] text-sm'>Data Science</li>
             </Link>
           </ul>
         </div>
@@ -56,15 +54,15 @@ const Header = () => {
         <div className='flex gap-3'>
           <Link
             to='/login'
-            className='py-2 px-4 shadow-sm font-medium bg-white text-xs rounded-sm'
+            className='py-2 px-4 border-2 shadow-sm font-medium bg-white text-xs rounded-sm'
           >
             Login
           </Link>
           <Link
             to='/signup'
-            className='py-2 px-4 shadow-sm bg-white text-xs rounded-sm font-semibold'
+            className='py-2 px-4 border-2 shadow-sm bg-white text-xs rounded-sm font-semibold'
           >
-            Sign Up
+            Create Account
           </Link>
         </div>
       ) : (

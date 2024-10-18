@@ -21,8 +21,9 @@ const SignUp = () => {
   }
 
   const handleFileChange = (e) => {
+    console.log(e)
     const file = e.target.files[0];
-    // console.log(file)
+    console.log(file)
     setUserInfo({...userInfo , imageUrl : file});
   } 
   
