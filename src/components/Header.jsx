@@ -8,7 +8,7 @@ import { setLogout } from "../store/userSlice";
 const Header = () => {
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
-  const token = Cookies.get("token"); 
+  const token = Cookies.get("accessToken"); 
   console.log(token)
 
   

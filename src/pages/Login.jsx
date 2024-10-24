@@ -21,7 +21,7 @@ const Login = () => {
      try{
        dispatch(setLoading(true));
        const res = await axiosInstance.post(LOG_IN,userInfo);
-       Cookies.set("token" , res.data.data.token);  
+       Cookies.set("accessToken" , res.data.data.accessToken);  
        dispatch(setUser(res.data.data._doc));
        toast.success('Login Successfully');
        setUserInfo({email: '',password: ''});
