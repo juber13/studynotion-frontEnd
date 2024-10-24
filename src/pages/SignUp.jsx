@@ -6,6 +6,7 @@ import { useSelector , useDispatch } from 'react-redux'
 import { setLoading } from '../store/userSlice'
 import { SIGN_IN } from '../../utils/restEndPoints'
 import axiosInstance from '../../utils/axiosInstance'
+axios.defaults.withCredentials = true;
 
 const SignUp = () => {
   const [userInfo , setUserInfo] = useState({name : "" , lastName : "" , imageUrl : "", email : "" , password : "" , phoneNumber : "" , confirmPassword : "" , role : ""});
@@ -21,18 +22,35 @@ const SignUp = () => {
   }
 
   const handleFileChange = (e) => {
-    console.log(e)
-    const file = e.target.files[0];
-    console.log(file)
-    setUserInfo({...userInfo , imageUrl : file});
-  } 
+    const { name, files } = e.target;
+    console.log(files)
+
+    // Check if files are selected
+    if (files.length > 0) {
+      const file = files[0];
+      console.log(file);
+      setUserInfo((prevDetails) => ({
+        ...prevDetails,
+        [name]: file, 
+      }));
+    }
+  };
   
   const handleSignUp = async(e) => {
     e.preventDefault();
     try{
+      const formData = new FormData();
+      for(let key in userInfo){
+        formData.append(key , userInfo[key]);
+      } 
       dispatch(setLoading(true));
-      const res = await axiosInstance.post(SIGN_IN, userInfo);
-      Object.keys(userInfo).forEach(key => userInfo[key] = "");
+      const res = await axiosInstance.post(SIGN_IN, formData);
+      // formData.forEach(key => formData[key] = "");
+      // setUserInfo({ ...userInfo, [key]: "" });
+      for (let key in userInfo) {
+        setUserInfo({ ...userInfo, [key]: "" });
+      } 
+
       toast.success(res.data.message)
       dispatch(setLoading(false));
       navigate('/login'); 
@@ -172,7 +190,7 @@ const SignUp = () => {
             <div className='flex gap-3 mt-4'>
               <button
                 className={`p-2 rounded-md text-xs bg-green-500 text-white font-semibold ${
-                  loading ? "cursor-not-allowed animate-spin" : ""
+                  loading ? "cursor-not-allowed" : ""
                 }`}
                 type='submit'
               >

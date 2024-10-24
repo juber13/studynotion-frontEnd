@@ -15,6 +15,7 @@ import Layout from './components/Layout/Layout'
 import Home from './components/Home'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import DashBoard from './pages/DashBoard'
+import CourseDetail from './pages/CourseDetail'
 
 const Login = lazy(() => import('./pages/Login'));
 
@@ -62,6 +63,11 @@ const router = createBrowserRouter([
           </ProtectedRoutes>
         ),
       },
+
+      {
+        path: "/course/:id",
+        element: <ProtectedRoutes><CourseDetail /></ProtectedRoutes>  
+      }
     ],
   },
 ]);

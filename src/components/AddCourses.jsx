@@ -40,12 +40,15 @@ const AddCourses = () => {
 
     try{
       dispatch(setLoading(true));
-      const formData = new FormData();
+      const formData = new FormData(); 
+      
       for(let key in courseDetails){
         formData.append(key , courseDetails[key])
       }
+
       const res = await axiosInstance.post(UPLOAD_COURSES, formData);
       toast.success("Course Uploaded Successfully")
+      
       for(let key in courseDetails){
         setCourseDetails({...courseDetails , [key] : ""})
       } 
@@ -144,6 +147,7 @@ const AddCourses = () => {
             id=''
             placeholder='course description'
             onChange={handleChange}
+        
           ></textarea>
 
           <button

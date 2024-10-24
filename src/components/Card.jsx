@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom'  
 const Card = ({course}) => { 
-
+  const navigate = useNavigate()
   console.log(course)
 
   return (
     <div
+      onClick={() => navigate(`/course/${course._id}`)}
       key={course._id}
       className='w-[250px] border-slate-200 border-2 overflow-hidden flex flex-col h-[320px] p-2  items-center gap-2  rounded-lg shadow-lg bg-white transition-transform transform hover:scale-105'
     >

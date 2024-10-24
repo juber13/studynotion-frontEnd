@@ -8,6 +8,7 @@ import { setUser, setToken , setLoading } from '../store/userSlice';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import axiosInstance from '../../utils/axiosInstance';
 import { LOG_IN } from '../../utils/restEndPoints';
+
 const Login = () => {
   const [userInfo, setUserInfo] = useState({email: '',password: ''});
   const navigate = useNavigate();
@@ -20,16 +21,16 @@ const Login = () => {
      try{
        dispatch(setLoading(true));
        const res = await axiosInstance.post(LOG_IN,userInfo);
-
        Cookies.set("token" , res.data.data.token);  
        dispatch(setUser(res.data.data._doc));
        toast.success('Login Successfully');
        setUserInfo({email: '',password: ''});
+
        dispatch(setLoading(false));
        navigate('/');
      }catch(error){
        console.log(error);  
-       toast.error(error.response.data.error, { style : {fontSize : "12px" }, duration : 1000 });
+      //  toast.error(error, { style : {fontSize : "12px" }, duration : 1000 });
        dispatch(setLoading(false));
      }
   };
