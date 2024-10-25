@@ -9,40 +9,41 @@ const Card = ({course}) => {
     <div
       onClick={() => navigate(`/course/${course._id}`)}
       key={course._id}
-      className='w-[250px] border-slate-200 border-2 overflow-hidden flex flex-col h-[320px] p-2  items-center gap-2  rounded-lg shadow-lg bg-white transition-transform transform hover:scale-105'
+      className='bg-white shadow-lg rounded-lg pt-6 overflow-hidden transition-transform transform hover:scale-105 duration-300 w-full max-w-[250px] mx-auto'
     >
-      <div className=''>
+      <div className='relative'>
         <img
           src={course.thumbnail}
           alt={course.courseName}
-          className=' rounded-t-lg h-[90px] w-full object-contain'
+          className='w-[80%] m-auto bg-cover h-[120px] object-cover rounded-t-lg transition-transform duration-300'
+          onError={(e) => {
+            e.target.src =
+              "https://via.placeholder.com/400x200?text=Course+Image";
+          }}
         />
+        <div className=' bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-300 to-transparent'>
+          <h3 className='text-black font-bold text-lg'>{course.courseName}</h3>
+        </div>
       </div>
 
-      <div className='flex flex-col items-start p-4'>
-        <p className='text-lg font-bold text-gray-800 truncate'>
-          Course: {course.courseName}
-        </p>
-        <p className='text-md font-semibold text-green-600'>
-          Price: {course.coursePrice}
-        </p>
-        <p className='text-sm text-gray-600'>
-          Duration: {course.courseDuration}
-        </p>
-        <p className='text-sm text-gray-600 truncate'>
-          Instructor: {course.createdBy}
-        </p>
-        <p className='text-sm text-gray-600'>Ratings : {(Math.random() * 4 + 1).toFixed(2)}</p>
-        {/* <p className='text-sm text-gray-500 word-break w-full'>
-          Description: {course.description}
-        </p> */}
-      </div>
+      <div className='p-4'>
+        <div className='flex justify-between items-center'>
+          <span className='text-xl font-semibold text-indigo-600'>
+            ₹{course.coursePrice}
+          </span>
+          <span className='text-sm text-gray-500'>{course.courseDuration}</span>
+        </div>
 
-      <button className='w-[90%] text-blue-600 font-semibold border p-2 text-sm  rounded-md bg-slate-100 transition duration-200'>
-        Buy Now
-      </button>
+        <div className='flex items-center gap-2 text-gray-600 mt-2'>
+          <span className='material-icons text-sm text-indigo-500'>Instructor</span>
+          <span className='text-sm truncate'>{course.createdBy}</span>
+        </div>
+
+        <button className='mt-4 w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
+          Enroll Now
+        </button>
+      </div>
     </div>
   );
 }
-
 export default Card

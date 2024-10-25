@@ -35,7 +35,7 @@ const DashBoard = () => {
     
 
     const handleLogout = () => {
-      Cookies.remove('token', { path: '/' });
+      Cookies.remove('accessToken');
       toast.success("Logout Successfully"); 
       localStorage.removeItem("persist:root");  
       dispatch(setLogout(null));

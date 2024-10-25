@@ -6,6 +6,7 @@ import { useSelector , useDispatch } from 'react-redux'
 import { setLoading } from '../store/userSlice'
 import { SIGN_IN } from '../../utils/restEndPoints'
 import axiosInstance from '../../utils/axiosInstance'
+import Input from '../components/Input'
 axios.defaults.withCredentials = true;
 
 const SignUp = () => {
@@ -64,7 +65,7 @@ const SignUp = () => {
 
 
   return (
-    <div className='w-full border shadow-md max-w-xl m-auto mt-20 p-10'>
+    <div className='w-full border shadow-md max-w-xl m-auto mt-20 p-8 rounded-md'>
       <div className='signup-section max-w-6xl m-auto'>
         <div className='left'>
           <div className='heading flex gap-4 flex-col'>
@@ -72,129 +73,151 @@ const SignUp = () => {
           </div>
 
           <form className='flex flex-col gap-3' onSubmit={handleSignUp}>
-            <div className='role flex gap-2 mt-3'>
-              <input
-                type='radio'
-                className='bg-white border p-1 rounded-md text-sm cursor-pointer'
-                name='role'
-                value='student'
-                onChange={handleChange}
-              />
-              Student
-              <input
-                type='radio'
-                className='bg-white border p-1 rounded-md text-sm cursor-pointer'
-                name='role'
-                value='instructor'
-                onChange={handleChange}
-              />
-              Instructor
-            </div>
-
-            <div className='flex gap-3 w-full'>
-              <div className='flex flex-col flex-1'>
-                <label htmlFor='name' className='text-sm font-semibold'>
-                  First Name <span className='text-red'>*</span>
-                </label>
-                <input
-                  name='name'
-                  className='border rounded-md p-3 outline-none text-sm'
-                  type='text'
-                  placeholder='Enter First Name'
-                  onChange={handleChange}
-                />
-              </div>
-              <div className='flex flex-col flex-1'>
-                <label htmlFor='Email' className='text-sm font-semibold'>
-                  Last Name <span className='text-red'>*</span>
-                </label>
-                <input
-                  name='lastName'
-                  className='border rounded-md p-3 outline-none text-sm '
-                  type='text'
-                  placeholder='Enter Last Name'
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className='flex gap-3'>
-              <div className='flex flex-col flex-1'>
-                <label htmlFor='Email' className='text-sm font-semibold'>
-                  Email Address <span className='text-red'>*</span>
-                </label>
-                <input
-                  name='email'
-                  className='border rounded-md p-3 outline-none text-sm'
-                  type='text'
-                  placeholder='Enter Email'
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className='flex flex-col flex-1'>
-                <label htmlFor='phone' className='text-sm font-semibold'>
-                  Phone Number <span className='text-red'>*</span>
-                </label>
-                <input
-                  name='phoneNumber'
-                  className='border rounded-md p-3 outline-none text-sm'
-                  type='text'
-                  placeholder='Phone code '
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className='flex gap-3'>
-              <div className='flex flex-col flex-1'>
-                <label htmlFor='password' className='text-sm font-semibold'>
-                  Enter Password <span className='text-red'>*</span>
-                </label>
-                <input
-                  name='password'
-                  className='border rounded-md p-3 outline-none text-sm'
-                  type='password'
-                  placeholder='Enter Password'
-                  onChange={handleChange}
-                />
-              </div>
-              <div className='flex flex-col flex-1'>
+            <div className='role flex gap-4 mt-3'>
+              {["student", "instructor"].map((role) => (
                 <label
-                  htmlFor='confirm-password'
-                  className='text-sm font-semibold'
+                  key={role}
+                  className='flex items-center space-x-2 cursor-pointer'
                 >
-                  Confirm Password <span className='text-red'>*</span>
+                  <input
+                    type='radio'
+                    className='form-radio h-4 w-4 text-green-500 transition duration-150 ease-in-out cursor-pointer'
+                    name='role'
+                    value={role}
+                    checked={userInfo.role === role}
+                    onChange={handleChange}
+                  />
+                  <span className='text-gray-700'>
+                    {role.charAt(0).toUpperCase() + role.slice(1)}
+                  </span>
                 </label>
-                <input
-                  name='confirmPassword'
-                  className='border rounded-md p-3 outline-none text-sm'
-                  type='password'
-                  placeholder='Confirm Password'
-                  onChange={handleChange}
-                />
-              </div>
+              ))}
+            </div>
+
+            <div className='grid grid-cols-2 gap-2'>
+              <Input
+                placeholder={"First Name"}
+                name={"name"}
+                value={userInfo.name}
+                onChange={handleChange}
+                type={"text"}
+              />
+              <Input
+                placeholder={"Last Name"}
+                name={"lastName"}
+                value={userInfo.lastName}
+                onChange={handleChange}
+                type={"text"}
+              />
+            </div>
+
+            <div className='grid grid-cols-2 gap-2'>
+              <Input
+                placeholder={"email "}
+                name={"email"}
+                value={userInfo.email}
+                onChange={handleChange}
+                type={"text"}
+              />
+              <Input
+                placeholder={"Phone"}
+                name={"phoneNumber"}
+                value={userInfo.phone}
+                onChange={handleChange}
+                type={"text"}
+              />
+            </div>
+
+            <div className='grid grid-cols-2 gap-2'>
+              <Input
+                type={"password"} 
+                placeholder={"password"}
+                name={"password"}
+                value={userInfo.password}
+                onChange={handleChange}
+
+              />
+              <Input
+                type={"password"}
+                placeholder={"confirm password"}
+                name={"confirmPassword"}
+                value={userInfo.confirmPassword}
+                onChange={handleChange}
+              />
             </div>
 
             <div className='flex gap-3 flex-col'>
-              <label htmlFor='lastName'>Profile Picture</label>
-              <input
-                type='file'
-                placeholder='image'
-                name='imageUrl'
-                className='p-1 border rounded-md'
-                onChange={handleFileChange}
-              />
+               
+              <label htmlFor='fileInput' className='text-sm font-semibold'>
+                Profile Picture
+              </label>
+              <div className='relative'>
+                <input
+                  type='file'
+                  placeholder='image'
+                  name='imageUrl'
+                  className='hidden'
+                  id='fileInput'
+                  onChange={handleFileChange}
+                />
+                <label
+                  htmlFor='fileInput'
+                  className='cursor-pointer flex items-center gap-2 p-4 border-2 border-dashed border-gray-300 rounded-md hover:border-green-500 transition-colors duration-300'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-5 w-5 text-gray-500'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'
+                    />
+                  </svg>
+                  <span className='text-sm text-gray-600'>
+                    {userInfo.imageUrl
+                      ? userInfo.imageUrl.name
+                      : "Choose a profile picture"}
+                  </span>
+                </label>
+              </div>
             </div>
 
             <div className='flex gap-3 mt-4'>
               <button
-                className={`p-2 rounded-md text-xs bg-green-500 text-white font-semibold ${
-                  loading ? "cursor-not-allowed" : ""
+                className={`p-3 px-6 rounded-lg text-sm bg-green-500 text-white font-semibold hover:bg-green-600 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg ${
+                  loading ? "opacity-70 cursor-not-allowed" : ""
                 }`}
                 type='submit'
+                disabled={loading}
               >
-                {loading ? "Signing.." : "Sign Up"}
+                {loading ? (
+                  <span className='flex items-center gap-2'>
+                    <svg className='animate-spin h-4 w-4' viewBox='0 0 24 24'>
+                      <circle
+                        className='opacity-25'
+                        cx='12'
+                        cy='12'
+                        r='10'
+                        stroke='currentColor'
+                        strokeWidth='4'
+                        fill='none'
+                      />
+                      <path
+                        className='opacity-75'
+                        fill='currentColor'
+                        d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                      />
+                    </svg>
+                    Signing...
+                  </span>
+                ) : (
+                  "Sign Up"
+                )}
               </button>
             </div>
           </form>

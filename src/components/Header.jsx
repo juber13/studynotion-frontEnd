@@ -13,54 +13,53 @@ const Header = () => {
 
   
   return (
-    <div className='border p-3 fixed w-full z-10 top-0 flex items-center justify-between bg-gray-100'>
-      <div className='logo cursor-pointer' onClick={() => navigate("/")}>
-        <img
-          src='data:image/png;base64,...' // Your base64 image
-          alt=''
-        />
+    <div className='border-b shadow-md p-4 fixed w-full z-10 top-0 flex items-center justify-between bg-white backdrop-blur-sm bg-opacity-90'>
+      <div className='logo font-semibold text-slate-800 cursor-pointer transform hover:scale-105 transition-transform duration-200' onClick={() => navigate("/")}>
+        Study Notion
       </div>
 
-      <div className='menu-center flex gap-4 text-black-500 font-[400]'>
+      <div className='menu-center flex gap-6 text-gray-700 font-medium'>
         <Link to='/'>
-          <span className='text-green-400 hover:text-green-600'>Home</span>
+          <span className='text-green-500 hover:text-green-600 transition-colors duration-200'>Home</span>
         </Link>
         <div
-          className='flex items-center relative cursor-pointer hover:text-green-600'
+          className='flex items-center relative cursor-pointer hover:text-green-600 transition-colors duration-200'
           onClick={() => setToggle(!toggle)}
         >
           Category
-          <BiCaretDown />
+          <BiCaretDown className="ml-1" />
           <ul
-            className={`absolute top-10 bg-white-600 border shadow-md rounded-sm p-3 ${ toggle ? "block" : "hidden"}`}
+            className={`absolute top-12 bg-white border rounded-lg shadow-xl p-4 w-48 space-y-2 transform transition-all duration-200 ${
+              toggle ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
+            }`}
           >
             <Link to='/'>
-              <li className='hover:text-green-500 font-[300] text-sm'>FrontEnd</li>
+              <li className='hover:text-green-500 hover:bg-gray-50 p-2 rounded-md transition-colors duration-200'>FrontEnd</li>
             </Link>
             <Link to='/about'>
-              <li className='hover:text-green-500 font-[300] text-sm'>Backend</li>
+              <li className='hover:text-green-500 hover:bg-gray-50 p-2 rounded-md transition-colors duration-200'>Backend</li>
             </Link>
             <Link to='/contact'>
-              <li className='hover:text-green-500 font-[300] text-sm'>Data Science</li>
+              <li className='hover:text-green-500 hover:bg-gray-50 p-2 rounded-md transition-colors duration-200'>Data Science</li>
             </Link>
           </ul>
         </div>
-        <Link to='/about' className="hover:text-green-600">About us</Link>
-        <Link to='/contact' className="hover:text-green-600">Contact us</Link>
-        <Link to='#courses' className="hover:text-green-600">Courses</Link>
+        <Link to='/about' className="hover:text-green-600 transition-colors duration-200">About us</Link>
+        <Link to='/contact' className="hover:text-green-600 transition-colors duration-200">Contact us</Link>
+        <Link to='#courses' className="hover:text-green-600 transition-colors duration-200">Courses</Link>
       </div>
 
       {!token ? (
-        <div className='flex gap-3'>
+        <div className='flex gap-4'>
           <Link
             to='/login'
-            className='py-2 px-4 border-2 shadow-sm font-medium bg-white text-xs rounded-sm'
+            className='py-2 px-6 border border-green-500 text-green-500 hover:bg-green-50 rounded-full transition-colors duration-200 text-sm font-medium'
           >
             Login
           </Link>
           <Link
             to='/signup'
-            className='py-2 px-4 border-2 shadow-sm bg-white text-xs rounded-sm font-semibold'
+            className='py-2 px-6 bg-green-500 text-white hover:bg-green-600 rounded-full transition-colors duration-200 text-sm font-medium'
           >
             Create Account
           </Link>
@@ -68,9 +67,9 @@ const Header = () => {
       ) : (
         <button
           onClick={() => navigate("/dashboard")}
-          className='p-2 shadow-sm bg-green-500 rounded-md text-white text-sm font-semibold hover:bg-green-700'
+          className='px-6 py-2 bg-green-500 rounded-full text-white text-sm font-medium hover:bg-green-600 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg'
         >
-          DashBoard
+          Dashboard
         </button>
       )}
     </div>

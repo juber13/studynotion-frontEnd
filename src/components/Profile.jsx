@@ -175,7 +175,7 @@ const Profile = () => {
                 <h2>
                   FullName : {name} {lastName}
                 </h2>
-                <h2>Email : {email}</h2>
+                <h2>Email : {email} </h2>
               </div>
 
               <button

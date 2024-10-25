@@ -8,7 +8,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <div className='footer-container bg-[#F8F8F8] p-4'>
+    <div className='footer-container bg-white border p-1'>
       <div className='container w-[90%] max-w-5xl m-auto'>
         <div className='top flex items-center justify-between mt-5 sm:mt-8'>
           <img src='../../images/zomato.avif' alt='' className='w-[120px]' />
@@ -43,17 +43,15 @@ const Footer = () => {
             <a href='#' className='text-md font-normal tracking-[2px]'>
               ZOMAVERSE
             </a>
-            <a href='#'>Zomato</a>
-            <a href='#'>Blinkit</a>
             <a href='#'>Feeding India</a>
             <a href='#'>Hyperpure</a>
-            <a href='#'>Zomato Live</a>
-            <a href='#'>Zomaland</a>
+            <a href='#'>Notion Live</a>
+            <a href='#'>Study</a>
             <a href='#'>Weather Union</a>
           </div>
           <div className='flex flex-col gap-1 font-[300] '>
             <a href='#' className='text-md font-normal tracking-[2px]'>
-              FOR RESTAURENTS
+              FOR Notion
             </a>
             <a href='#'>Partner With Us</a>
             <a href='#'>Apps For You</a>
