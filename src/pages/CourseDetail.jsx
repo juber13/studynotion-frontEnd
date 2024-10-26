@@ -8,7 +8,9 @@ import toast from 'react-hot-toast';
 import Loader from '../components/Loader';
 import Card from '../components/Card';
 const CourseDetail = () => {
+    
     const {id} = useParams();
+
     const [course , setCourse] = useState({});
     const {loading}  = useSelector(state => state.user);
     const dispatch = useDispatch();

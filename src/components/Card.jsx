@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { useNavigate } from 'react-router-dom'  
+import { useNavigate } from 'react-router-dom' 
+
 const Card = ({course}) => { 
   const navigate = useNavigate()
   console.log(course)
@@ -9,20 +10,20 @@ const Card = ({course}) => {
     <div
       onClick={() => navigate(`/course/${course._id}`)}
       key={course._id}
-      className='bg-white shadow-lg rounded-lg pt-6 overflow-hidden transition-transform transform hover:scale-105 duration-300 w-full max-w-[250px] mx-auto'
+      className='bg-white shadow-lg rounded-lg  cursor-pointer overflow-hidden transition-transform transform hover:scale-105 duration-300 w-full max-w-[250px]'
     >
       <div className='relative'>
         <img
           src={course.thumbnail}
           alt={course.courseName}
-          className='w-[80%] m-auto bg-cover h-[120px] object-cover rounded-t-lg transition-transform duration-300'
+          className='w-full max-w-full bg-cover h-[150px] object-cover rounded-t-lg transition-transform duration-300'
           onError={(e) => {
             e.target.src =
               "https://via.placeholder.com/400x200?text=Course+Image";
           }}
         />
-        <div className=' bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-300 to-transparent'>
-          <h3 className='text-black font-bold text-lg'>{course.courseName}</h3>
+        <div className='absolute hover:h-[150px] transition-transform duration-300 w-full bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent'>
+          <h3 className='text-white font-bold text-lg'>{course.courseName}</h3>
         </div>
       </div>
 
@@ -35,7 +36,9 @@ const Card = ({course}) => {
         </div>
 
         <div className='flex items-center gap-2 text-gray-600 mt-2'>
-          <span className='material-icons text-sm text-indigo-500'>Instructor</span>
+          <span className='material-icons text-sm text-indigo-500'>
+            Instructor
+          </span>
           <span className='text-sm truncate'>{course.createdBy}</span>
         </div>
 

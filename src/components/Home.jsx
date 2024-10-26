@@ -40,10 +40,6 @@ const Home = () => {
       getAllCourses();
     }, []);
 
-
-  // console.log(userInfo.user);
-  console.log(loading)
-  console.log(Cookies.get('token'));
   return (
     <div className='main-section flex flex-col items-center justify-center w-full h-auto bg-gradient-to-b from-white to-gray-100'>
       <div className='hero-section gap-8 flex flex-col mt-20 items-center justify-center max-w-3xl m-auto h-screen px-4'>
@@ -76,13 +72,13 @@ const Home = () => {
           </a>
         </div>
 
-        <div className='text-5xl mt-20 border-2 border-green-300 rounded-full shadow-xl p-2 animate-bounce cursor-pointer hover:border-green-500 transition-all duration-300'>
+        {/* <div className='text-5xl mt-20 border-2 border-green-300 rounded-full shadow-xl p-2 animate-bounce cursor-pointer hover:border-green-500 transition-all duration-300'>
           <HiChevronDown className='text-green-500' />
-        </div>
+        </div> */}
       </div>
       <div className='my-course mt-10 mb-10 w-[90%] max-w-7xl'>
         <h3 className='text-3xl font-bold text-center text-slate-700 mb-8'>Trending Courses</h3>
-        <div className='flex items-start flex-wrap gap-6 mt-6 p-6  h-full mb-6 '> 
+        <div className='flex flex-wrap items-start justify-center gap-6  '> 
           {loading && <Loader/>}
           {courses?.map((course) => <Card key={course._id} course={course} />)} 
         </div>

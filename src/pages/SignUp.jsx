@@ -7,6 +7,7 @@ import { setLoading } from '../store/userSlice'
 import { SIGN_IN } from '../../utils/restEndPoints'
 import axiosInstance from '../../utils/axiosInstance'
 import Input from '../components/Input'
+import LoginImage  from '../assets/flat-design-illustration-web-developers_23-2148817995.avif'
 axios.defaults.withCredentials = true;
 
 const SignUp = () => {
@@ -65,8 +66,8 @@ const SignUp = () => {
 
 
   return (
-    <div className='w-full border shadow-md max-w-xl m-auto mt-20 p-8 rounded-md'>
-      <div className='signup-section max-w-6xl m-auto'>
+    <div className='w-full border shadow-md flex m-auto gap-3 mt-12 p-8 rounded-md'>
+      <div className='signup-section flex-1 m-auto'>
         <div className='left'>
           <div className='heading flex gap-4 flex-col'>
             <h2 className='text-2xl'>Register</h2>
@@ -130,12 +131,11 @@ const SignUp = () => {
 
             <div className='grid grid-cols-2 gap-2'>
               <Input
-                type={"password"} 
+                type={"password"}
                 placeholder={"password"}
                 name={"password"}
                 value={userInfo.password}
                 onChange={handleChange}
-
               />
               <Input
                 type={"password"}
@@ -147,7 +147,6 @@ const SignUp = () => {
             </div>
 
             <div className='flex gap-3 flex-col'>
-               
               <label htmlFor='fileInput' className='text-sm font-semibold'>
                 Profile Picture
               </label>
@@ -222,6 +221,10 @@ const SignUp = () => {
             </div>
           </form>
         </div>
+      </div>
+
+      <div className='border-l-2 flex-1 flex items-center justify-center pr-4'>
+        <img src={LoginImage} alt='' className='size-80 object-cover' />
       </div>
     </div>
   );
