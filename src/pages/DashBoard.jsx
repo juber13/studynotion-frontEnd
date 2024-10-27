@@ -8,6 +8,7 @@ import MyCourse from '../components/MyCourse';
 import WishList from '../components/WishList';
 import Setting from '../components/Setting';
 import EnrolledCourses from '../components/EnrolledCourses';
+import ForgotPassword from './ForgotPassword';
 import { useState } from 'react';
 import Cookies from 'js-cookie'
 import toast from 'react-hot-toast';
@@ -27,7 +28,7 @@ const DashBoard = () => {
         {wishList : <WishList />},
         {setting : <Setting />},
         {enrolledCourses : <EnrolledCourses />},
-        {addCourses : <AddCourses />},
+      {addCourses : <AddCourses />}
     ]
     )
 
@@ -123,14 +124,44 @@ const DashBoard = () => {
             Setting
           </li>
 
-          <li className='p-2 w-full text-center hover:bg-gray-100 cursor-pointer' onClick={handleLogout}>
+          <li
+            className={`p-2 w-full text-center hover:bg-gray-100 cursor-pointer ${
+              currentComponent === "setting"
+                ? "bg-gray-50  border-green-400 border-r-4"
+                : ""
+            }`}
+            onClick={() => navigate("/forgot-password")}
+          >
+            <HiOutlineCog className='inline-block mr-2' />
+            Forget Password
+          </li>
+
+          {/* <li
+            className={`p-2 w-full text-center hover:bg-gray-100 cursor-pointer ${
+              currentComponent === "setting"
+                ? "bg-gray-50  border-green-400 border-r-4"
+                : ""
+            }`}
+            onClick={() => setCurrentComponent("setting")}
+          >
+            <HiOutlineCog className='inline-block mr-2' />
+            Update Password
+          </li> */}
+
+          <li
+            className='p-2 w-full text-center hover:bg-gray-100 cursor-pointer'
+            onClick={handleLogout}
+          >
             <HiOutlineLogout className='inline-block mr-2' />
             Logout
           </li>
         </ul>
       </div>
 
-      <div className='w-[calc(100%-300px)] ml-[300px] mt-10' key={Math.random() * 100}>
+      <div
+        className='w-[calc(100%-300px)] ml-[300px] mt-10'
+        key={Math.random() * 100}
+      >
         {myComponents.map((item) => {
           if (item[currentComponent]) {
             return item[currentComponent];

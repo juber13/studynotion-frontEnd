@@ -32,7 +32,13 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: (
-          <Suspense fallback={<div className='text-6xl text-red-400 mt-10 w-full height'>Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className='text-6xl text-red-400 mt-10 w-full height'>
+                Loading...
+              </div>
+            }
+          >
             <LazyAbout />
           </Suspense>
         ),
@@ -43,17 +49,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/forgot-password",
-        element: <ForgotPassword />,
+        element: (
+          <ProtectedRoutes>
+            <ForgotPassword />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/login",
-        element: <Suspense fallback={<div>Loading...</div>}>
-           <Login />  
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Login />
           </Suspense>
+        ),
       },
       {
         path: "/signup",
-        element: <Suspense fallback={<div>Loading...</div>}><SignUp/></Suspense>
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <SignUp />
+          </Suspense>
+        ),
       },
       {
         path: "/dashboard",
@@ -66,8 +82,12 @@ const router = createBrowserRouter([
 
       {
         path: "/course/:id",
-        element: <ProtectedRoutes><CourseDetail /></ProtectedRoutes>  
-      }
+        element: (
+          <ProtectedRoutes>
+            <CourseDetail />
+          </ProtectedRoutes>
+        ),
+      },
     ],
   },
 ]);
