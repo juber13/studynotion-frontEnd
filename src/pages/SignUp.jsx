@@ -70,10 +70,10 @@ const SignUp = () => {
       <div className='signup-section flex-1 m-auto'>
         <div className='left'>
           <div className='heading flex gap-4 flex-col'>
-            <h2 className='text-2xl'>Register</h2>
+            <h2 className='text-2xl text-center'>Register</h2>
           </div>
 
-          <form className='flex flex-col gap-3' onSubmit={handleSignUp}>
+          <form className='flex flex-col gap-3 pl-8' onSubmit={handleSignUp}>
             <div className='role flex gap-4 mt-3'>
               {["student", "instructor"].map((role) => (
                 <label
@@ -212,7 +212,7 @@ const SignUp = () => {
                         d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
                       />
                     </svg>
-                    Signing...
+                    Signing Up
                   </span>
                 ) : (
                   "Sign Up"
@@ -223,7 +223,7 @@ const SignUp = () => {
         </div>
       </div>
 
-      <div className='border-l-2 flex-1 flex items-center justify-center pr-4'>
+      <div className='flex-1 flex items-center justify-center pr-4'>
         <img src={LoginImage} alt='' className='size-80 object-cover' />
       </div>
     </div>

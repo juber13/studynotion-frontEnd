@@ -70,24 +70,23 @@ const Profile = () => {
   return (
     <>
       {isEditMode ? (
-        <div className='edit-from mt-20 border p-5 flex-start max-w-5xl'>
-          <div className='heading flex items-center justify-between w-full'>
-            <h2 className='text-2xl ml-3 font-semibold'>Edit Profile</h2>
+        <div className='edit-from mt-20 border border-gray-200 rounded-lg shadow-lg p-8 flex-start max-w-5xl bg-white'>
+          <div className='heading flex items-center justify-between w-full border-b pb-4'>
+            <h2 className='text-3xl font-bold text-gray-800'>Edit Profile</h2>
             <div
-              className='border p-2 text-sm font-semibold bg-orange-400 rounded-md text-white cursor-pointer'
+              className='px-4 py-2 text-sm font-semibold bg-red-500 hover:bg-red-600 rounded-lg text-white cursor-pointer transition-colors duration-300 flex items-center gap-2'
               onClick={() => setIsEditMode(false)}
             >
               Cancel
             </div>
           </div>
-          <form
-            className='grid grid-cols-2 gap-3 mt-10 p-3'
-            onSubmit={handleUpdate}
-          >
-            <div className='flex flex-col gap-2'>
-              Profile Image
-              <div className='flex items-center border rounded-md'>
-                <label className='flex items-center cursor-pointer bg-slate-500 text-white px-4 p-2 text-sm placeholder:text-xs rounded-md hover:bg-slate-700'>
+          <form className='grid grid-cols-2 gap-6 mt-8' onSubmit={handleUpdate}>
+            <div className='flex flex-col gap-3'>
+              <h3 className='text-lg font-semibold text-gray-700'>
+                Profile Image
+              </h3>
+              <div className='flex items-center border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 transition-colors duration-300'>
+                <label className='flex items-center cursor-pointer bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 text-sm font-medium rounded-lg transition-colors duration-300'>
                   <input
                     type='file'
                     className='hidden'
@@ -102,43 +101,49 @@ const Profile = () => {
                   />
                   Choose image
                 </label>
-                <span className='ml-4 text-gray-700' id='image-file'>
+                <span className='ml-4 text-gray-600' id='image-file'>
                   No file chosen
                 </span>
               </div>
             </div>
 
             <div className='flex flex-col gap-2'>
-              <label htmlFor='lastName'>Name</label>
+              <label htmlFor='name' className='text-gray-700 font-medium'>
+                Name
+              </label>
               <input
                 type='text'
-                placeholder='Name'
+                placeholder='Enter your name'
                 name='name'
-                className='p-1 border rounded-md placeholder:text-sm outline-none '
+                className='p-3 border-2 rounded-lg placeholder:text-gray-400 outline-none focus:border-blue-500 transition-colors duration-300'
                 value={updatedInfo.name}
                 onChange={handleChange}
               />
             </div>
 
             <div className='flex flex-col gap-2'>
-              <label htmlFor='lastName'>LastName</label>
+              <label htmlFor='lastName' className='text-gray-700 font-medium'>
+                Last Name
+              </label>
               <input
                 type='text'
-                placeholder='lastName'
+                placeholder='Enter your last name'
                 name='lastName'
-                className='p-1 border rounded-md placeholder:text-sm outline-none '
+                className='p-3 border-2 rounded-lg placeholder:text-gray-400 outline-none focus:border-blue-500 transition-colors duration-300'
                 value={updatedInfo.lastName}
                 onChange={handleChange}
               />
             </div>
 
             <div className='flex flex-col gap-2'>
-              <label htmlFor='phone'>Phone Number</label>
+              <label htmlFor='phone' className='text-gray-700 font-medium'>
+                Phone Number
+              </label>
               <input
                 type='text'
-                placeholder='phoneNumber'
+                placeholder='Enter your phone number'
                 name='phoneNumber'
-                className='p-1 border rounded-md placeholder:text-sm outline-none '
+                className='p-3 border-2 rounded-lg placeholder:text-gray-400 outline-none focus:border-blue-500 transition-colors duration-300'
                 value={updatedInfo.phoneNumber}
                 onChange={handleChange}
               />
@@ -146,10 +151,10 @@ const Profile = () => {
 
             <div>
               <button
-                className='border p-2 flex flex-start mt-3 text-sm rounded-md bg-green-500 text-white font-semibold'
+                className='px-6 py-3 text-sm font-semibold rounded-lg bg-green-500 hover:bg-green-600 text-white transition-colors duration-300 flex items-center gap-2'
                 type='submit'
               >
-                {loading ? "Updating..." : "Update"}
+                {loading ? "Updating..." : "Update Profile"}
               </button>
             </div>
           </form>
@@ -160,75 +165,95 @@ const Profile = () => {
             isEditMode && "hidden"
           }`}
         >
-          <div className='container p-8 flex flex-col gap-10'>
-            <div className='heading text-3xl mt-3'>My Profile </div>
+          <div className='container p-8 flex flex-col gap-8'>
+            <h1 className='text-4xl font-bold text-gray-800 border-b pb-4'>
+              My Profile
+            </h1>
 
-            <div className='relative w-fit' onClick={() => setIsEditMode(true)}>
+            <div
+              className='relative w-fit group'
+              onClick={() => setIsEditMode(true)}
+            >
               <img
                 src={imageUrl}
-                alt='Editable'
-                className='transition-transform border-4  shadow-md border-green-100  rounded-full duration-300 ease-in-out transform hover:scale-105 size-20'
+                alt='Profile'
+                className='transition-all duration-300 border-4 shadow-xl border-green-200 rounded-full hover:border-green-300 size-32'
               />
-              <div className='absolute inset-0 rounded-full cursor-pointer w-full left-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300'>
-                <span className='text-white text-lg'>
+              <div className='absolute inset-0 rounded-full cursor-pointer bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300'>
+                <span className='text-white text-2xl'>
                   <FaEdit />
                 </span>
               </div>
             </div>
 
-            <div className='user-info flex justify-between items-center border-2 rounded-md border-green-100 bg-gray-50 p-3'>
-              <div className='user-name'>
-                <h2>
-                  FullName :{" "}
-                  <i className='text-slate-500'>
-                    {name} {lastName}
+            <div className='user-info flex justify-between items-center border-2 rounded-xl border-green-200 bg-white p-6 shadow-lg hover:shadow-xl transition-shadow duration-300'>
+              <div className='user-name space-y-3'>
+                <h2 className='text-lg'>
+                  <span className='font-semibold'>Full Name : </span>{" "}
+                  <i className='text-gray-600'>
+                     {name} {lastName}
                   </i>
                 </h2>
-                <h2>
-                  Email : <i className='text-slate-500'>{email}</i>{" "}
+                <h2 className='text-lg'>
+                  <span className='font-semibold'>Email :</span>{" "}
+                  <i className='text-gray-600'> {email}</i>
                 </h2>
-
-                
               </div>
 
               <button
-                className='border p-2 text-sm bg-white rounded-md border-green-300 font-semibold'
+                className='p-3 text-lg bg-white rounded-lg border-2 border-green-300 hover:bg-green-50 transition-colors duration-300'
                 onClick={() => setIsEditMode(true)}
               >
                 <MdEdit />
               </button>
             </div>
-            <div className='about flex justify-between border-2  rounded-md border-green-100 items-center bg-gray-50 p-3'>
-              <div className='about-heading'>
-                <h3>About</h3>
-                <i className='text-slate-500'>I m full stack developer</i>
-                <h3>Course Uploaded</h3>
-                <i className='text-slate-500'>{10}</i>
 
+            <div className='about flex items-center justify-between border-2 rounded-xl border-green-200 bg-white p-6 shadow-lg hover:shadow-xl transition-shadow duration-300'>
+              <div className='space-y-4'>
+                <div>
+                  <h2 className='text-lg'>
+                    About :
+                    <i className='text-gray-600 '>
+                      {" "}
+                       I'm a full stack developer
+                    </i>
+                  </h2>
+                  <p className='text-gray-600'></p>
+                </div>
+                <div>
+                  <h2 className='text-lg '>
+                    Course Uploaded : <i className='text-gray-600'>{10}</i>
+                  </h2>
+                </div>
               </div>
 
               <button
-                className='border p-2 text-sm bg-white rounded-md border-green-300 font-semibold'
+                className='p-3 text-lg bg-white rounded-lg border-2 border-green-300 hover:bg-green-50 transition-colors duration-300'
                 onClick={() => setIsEditMode(true)}
               >
                 <MdEdit />
               </button>
             </div>
-            <div className='personal details flex justify-between border-2  rounded-md border-green-100 items-center bg-gray-50 p-3'>
-              <div className='personal-heading'>
-                <p>
-                  PhoneNumber : <i className='text-slate-500'>{phoneNumber}</i>
+
+            <div className='personal-details flex items-center justify-between border-2 rounded-xl border-green-200 bg-white p-6  shadow-lg hover:shadow-xl transition-shadow duration-300'>
+              <div className='space-y-3'>
+                <p className='text-lg'>
+                  <span className='font-semibold'>Phone Number:</span>{" "}
+                  <i className='text-gray-600'>{phoneNumber}</i>
                 </p>
-                <p>
-                  Role : <i className='text-slate-500'>{role}</i>
+                <p className='text-lg'>
+                  <span className='font-semibold'>Role:</span>{" "}
+                  <i className='text-gray-600'>{role}</i>
                 </p>
-                <p>
-                  IsActive :{" "}
-                  <i className='text-slate-500'>{isActive.toString()}</i>
+                <p className='text-lg'>
+                  <span className='font-semibold'>Status:</span>{" "}
+                  <i className='text-gray-600'>
+                    {isActive ? "Active" : "Inactive"}
+                  </i>
                 </p>
               </div>
               <button
-                className='border p-2 text-sm bg-white rounded-md border-green-300 font-semibold'
+                className='p-3 text-lg bg-white rounded-lg border-2 border-green-300 hover:bg-green-50 transition-colors duration-300'
                 onClick={() => setIsEditMode(true)}
               >
                 <MdEdit />
