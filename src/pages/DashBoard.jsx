@@ -28,8 +28,8 @@ const DashBoard = () => {
         {wishList : <WishList />},
         {setting : <Setting />},
         {enrolledCourses : <EnrolledCourses />},
-      {addCourses : <AddCourses />}
-    ]
+        {addCourses : <AddCourses />}
+      ]
     )
 
     const { role } = useSelector((state) => state.user.data);

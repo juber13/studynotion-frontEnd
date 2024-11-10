@@ -9,7 +9,6 @@ const Header = () => {
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   const token = Cookies.get("accessToken"); 
-  console.log(token)
 
   
   return (
@@ -18,7 +17,7 @@ const Header = () => {
         Study Notion
       </div>
 
-      <div className='menu-center flex gap-6 text-gray-700 font-medium'>
+      <div className='menu-center flex gap-6 text-gray-700 font-[400]'>
         <Link to='/'>
           <span className='text-green-500 hover:text-green-600 transition-colors duration-200'>Home</span>
         </Link>
@@ -34,19 +33,19 @@ const Header = () => {
             }`}
           >
             <Link to='/'>
-              <li className='hover:text-green-500 hover:bg-gray-50 p-2 rounded-md transition-colors duration-200'>FrontEnd</li>
+              <li className='text-black hover:bg-gray-50 p-2 rounded-md transition-colors duration-200'>FrontEnd</li>
             </Link>
             <Link to='/about'>
-              <li className='hover:text-green-500 hover:bg-gray-50 p-2 rounded-md transition-colors duration-200'>Backend</li>
+              <li className='text-black hover:bg-gray-50 p-2 rounded-md transition-colors duration-200'>Backend</li>
             </Link>
             <Link to='/contact'>
-              <li className='hover:text-green-500 hover:bg-gray-50 p-2 rounded-md transition-colors duration-200'>Data Science</li>
+              <li className='text-black hover:bg-gray-50 p-2 rounded-md transition-colors duration-200'>Data Science</li>
             </Link>
           </ul>
         </div>
         <Link to='/about' className="hover:text-green-600 transition-colors duration-200">About us</Link>
         <Link to='/contact' className="hover:text-green-600 transition-colors duration-200">Contact us</Link>
-        <Link to='#courses' className="hover:text-green-600 transition-colors duration-200">Courses</Link>
+        <Link to='/instructors' className="hover:text-green-600 transition-colors duration-200">Instructors</Link>
       </div>
 
       {!token ? (

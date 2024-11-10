@@ -1,7 +1,7 @@
 import React, { useEffect ,useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoading } from '../store/userSlice';
+import { setLoading , setIsupdated } from '../store/userSlice';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import axiosInstance from '../../utils/axiosInstance';
@@ -15,7 +15,7 @@ const MyCourse = () => {
     const { loading } = useSelector((state) => state.user);
 
   
-  // get all courses which are published by instructor
+  // get all courses which are published by instructo r
   const getInstructorCourses = async() => {
     try{
        dispatch(setLoading(true));
@@ -45,7 +45,8 @@ const MyCourse = () => {
       await axiosInstance.patch(`${MAKE_COURSE_PUBLISHED}/${courseId}` , {withCredentials : true})
 
       getInstructorCourses();
-      toast.success("Course Published Successfully")
+      toast.success("Course Published Successfully");
+      dispatch(setIsupdated(true));
       dispatch(setLoading(false));  
       }catch(err){
       console.log(err)
@@ -56,11 +57,12 @@ const MyCourse = () => {
   return (
     <div className='flex flex-wrap flex-col gap-10 justify-center items-center mt-10 pb-12'>
       {courses.length > 0 && <h3>My Courses</h3>}
-      <div className='flex w-[90%] gap-3'>
-        {loading && <h3>Loading Courses...</h3>}
+      <div className='flex w-[90%] gap-3 items-center justify-center'>
+        {loading && <h2 className='text-md '>Loading Courses...</h2>}
         {courses.length === 0 ? (
-          <div className='text-center text-slate-300 text-3xl flex items-center justify-center w-full height'>
-            No Courses Found
+          <div className='text-center text-slate-600 font-semibold text-3xl flex flex-col items-center justify-center w-full height '>
+            No Courses Found!
+            {/* <button className='text-sm border p-2 mt-3 rounded-md shadow-md font-md'>Create Courses</button> */}
           </div>
         ) : (
           <table className='w-full'>

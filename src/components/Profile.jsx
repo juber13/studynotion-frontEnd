@@ -7,6 +7,10 @@ import axios from "axios";
 import { FaEdit } from 'react-icons/fa';
 import axiosInstance from '../../utils/axiosInstance';
 import { UPDATE_USER_PROFILE } from '../../utils/restEndPoints';
+import { MdOutlineEditNote } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
+
+
 axios.defaults.withCredentials = true;
 
 import { Form } from 'react-router-dom';
@@ -31,7 +35,11 @@ const Profile = () => {
       setUpdatedInfo({ ...updatedInfo, [name]: value });
     };
 
-    
+    const handleFileChange = (e) => {
+      const { name, files } = e.target;
+      setUpdatedInfo({ ...updatedInfo, [name]: files[0] });
+    }; 
+
 
     const handleUpdate = async (e) => {
       e.preventDefault();
@@ -58,11 +66,7 @@ const Profile = () => {
       }
     }; 
 
-    const handleFileChange = (e) => {
-      const {name , files } = e.target;
-      setUpdatedInfo({ ...updatedInfo, [name]: files[0] });
-    } 
-
+    
   return (
     <>
       {isEditMode ? (
@@ -81,7 +85,7 @@ const Profile = () => {
             onSubmit={handleUpdate}
           >
             <div className='flex flex-col gap-2'>
-                  Profile Image
+              Profile Image
               <div className='flex items-center border rounded-md'>
                 <label className='flex items-center cursor-pointer bg-slate-500 text-white px-4 p-2 text-sm placeholder:text-xs rounded-md hover:bg-slate-700'>
                   <input
@@ -90,8 +94,10 @@ const Profile = () => {
                     name='imageUrl'
                     onChange={(e) => {
                       handleFileChange(e);
-                      const fileName = e.target.files[0]?.name || "No file chosen";
-                        document.getElementById("image-file").textContent =fileName;
+                      const fileName =
+                        e.target.files[0]?.name || "No file chosen";
+                      document.getElementById("image-file").textContent =
+                        fileName;
                     }}
                   />
                   Choose image
@@ -139,12 +145,12 @@ const Profile = () => {
             </div>
 
             <div>
-            <button
-              className='border p-2 flex flex-start mt-3 text-sm rounded-md bg-green-500 text-white font-semibold'
-              type='submit'
-            >
-             {loading ? "Updating..." : "Update"}  
-            </button>
+              <button
+                className='border p-2 flex flex-start mt-3 text-sm rounded-md bg-green-500 text-white font-semibold'
+                type='submit'
+              >
+                {loading ? "Updating..." : "Update"}
+              </button>
             </div>
           </form>
         </div>
@@ -173,42 +179,59 @@ const Profile = () => {
             <div className='user-info flex justify-between items-center border-2 rounded-md border-green-100 bg-gray-50 p-3'>
               <div className='user-name'>
                 <h2>
-                  FullName : {name} {lastName}
+                  FullName :{" "}
+                  <i className='text-slate-500'>
+                    {name} {lastName}
+                  </i>
                 </h2>
-                <h2>Email : {email} </h2>
+                <h2>
+                  Email : <i className='text-slate-500'>{email}</i>{" "}
+                </h2>
+
+                
               </div>
 
               <button
                 className='border p-2 text-sm bg-white rounded-md border-green-300 font-semibold'
                 onClick={() => setIsEditMode(true)}
               >
-                Edit
+                <MdEdit />
               </button>
             </div>
             <div className='about flex justify-between border-2  rounded-md border-green-100 items-center bg-gray-50 p-3'>
               <div className='about-heading'>
                 <h3>About</h3>
-                <p>I m full stack developer</p>
+                <i className='text-slate-500'>I m full stack developer</i>
+                <h3>Course Uploaded</h3>
+                <i className='text-slate-500'>{10}</i>
+
               </div>
 
               <button
                 className='border p-2 text-sm bg-white rounded-md border-green-300 font-semibold'
                 onClick={() => setIsEditMode(true)}
               >
-                Edit
+                <MdEdit />
               </button>
             </div>
             <div className='personal details flex justify-between border-2  rounded-md border-green-100 items-center bg-gray-50 p-3'>
               <div className='personal-heading'>
-                <p>PhoneNumber : {phoneNumber}</p>
-                <p>Role : {role}</p>
-                <p>IsActive : {isActive.toString()}</p>
+                <p>
+                  PhoneNumber : <i className='text-slate-500'>{phoneNumber}</i>
+                </p>
+                <p>
+                  Role : <i className='text-slate-500'>{role}</i>
+                </p>
+                <p>
+                  IsActive :{" "}
+                  <i className='text-slate-500'>{isActive.toString()}</i>
+                </p>
               </div>
               <button
                 className='border p-2 text-sm bg-white rounded-md border-green-300 font-semibold'
                 onClick={() => setIsEditMode(true)}
               >
-                Edit
+                <MdEdit />
               </button>
             </div>
           </div>

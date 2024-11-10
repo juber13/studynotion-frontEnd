@@ -5,7 +5,6 @@ import Footer from '../Footer'
 import Cookies from 'js-cookie'
 const Layout = () => {
     const token = Cookies.get("accessToken"); 
-    console.log(token);
 
   return (
     <>

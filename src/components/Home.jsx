@@ -11,33 +11,42 @@ import Card from './Card';
 import { GET_ALL_COURSES } from "../../utils/restEndPoints";
 import axiosInstance from '../../utils/axiosInstance';
 import Loader from './Loader';
+import { setIsupdated } from '../store/userSlice';
+
+let cache  = {};  // make a cache object to store the data
 
 
 const Home = () => {
-  // const token = Cookies.get('token');
-  // console.log(token); 
   const [courses, setCourses] = useState([]);
   const dispatch = useDispatch()
-  //  const {loading} = useSelector((state) => state.user);
-   const { loading } = useSelector((state) => state.user);
-
-  console.log(loading)
+   const { loading, isUpdatedSomething } = useSelector((state) => state.user);
 
     const getAllCourses = async () => {
-      try {
-        dispatch(setLoading(true));
-        const res = await axiosInstance.get(GET_ALL_COURSES);
-        console.log(res.data.data);
-        setCourses(res.data.data);
-        dispatch(setLoading(false));
-      } catch (err) {
-        console.log(err);
-        dispatch(setLoading(false));
-      }
+      if(cache["courses"] && !isUpdatedSomething){
+        setCourses(cache["courses"])
+        console.log("cache hit")
+        return;
+      }else{
+        try {
+          dispatch(setLoading(true));
+          const res = await axiosInstance.get(GET_ALL_COURSES);
+          cache["courses"] = res.data.data;
+          setCourses(res.data.data);
+          dispatch(setLoading(false));
+          dispatch(setIsupdated(false));
+        } catch (err) {
+          console.log(err);
+        } finally {
+          dispatch(setLoading(false));
+        }
+        }
     };
 
     useEffect(() => {
+      const controller = new AbortController();
       getAllCourses();
+
+      return () => { controller.abort(); }
     }, []);
 
   return (

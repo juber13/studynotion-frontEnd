@@ -27,13 +27,12 @@ const Login = () => {
        dispatch(setUser(res.data.data._doc));
        toast.success('Login Successfully');
        setUserInfo({email: '',password: ''});
-
        dispatch(setLoading(false));
        navigate('/');
      }catch(error){
-       console.log(error);  
-      //  toast.error(error, { style : {fontSize : "12px" }, duration : 1000 });
-       dispatch(setLoading(false));
+        console.log(error.response.data.error);
+        toast.error(error.response.data.error, { style : {fontSize : "12px" }, duration : 1000 });
+        dispatch(setLoading(false));
      }
   };
 
@@ -49,10 +48,10 @@ const Login = () => {
       <div className='flex-1 items-center'>
         <div className='max-w-md mx-auto flex flex-col gap-6'>
           <Input
-            type="text"
-            placeholder="Email"
+            type='text'
+            placeholder='Email'
             value={userInfo.email}
-            name="Email"
+            name='Email'
             onChange={(e) =>
               setUserInfo({ ...userInfo, email: e.target.value })
             }
@@ -82,11 +81,38 @@ const Login = () => {
                 Forgot Password
               </Link>
             </div>
+
             <button
-              className='bg-green-500 p-3 rounded-md text-white font-semibold shadow-lg text-lg hover:bg-green-600 transform hover:scale-[1.02] transition-all duration-300'
+              className={`p-3 px-6 rounded-lg  text-sm bg-green-500 text-white font-semibold hover:bg-green-600 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg ${
+                loading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
+              type='submit'
+              disabled={loading}
               onClick={handleLogin}
             >
-              {loading ? "logging..." : "Login"}
+              {loading ? (
+                <span className='flex items-center justify-center gap-2'>
+                  <svg className='animate-spin h-4 w-4' viewBox='0 0 24 24'>
+                    <circle
+                      className='opacity-25'
+                      cx='12'
+                      cy='12'
+                      r='10'
+                      stroke='currentColor'
+                      strokeWidth='4'
+                      fill='none'
+                    />
+                    <path
+                      className='opacity-75'
+                      fill='currentColor'
+                      d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                    />
+                  </svg>
+                  Logging...
+                </span>
+              ) : (
+                "Login"
+              )}
             </button>
           </div>
         </div>
