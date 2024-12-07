@@ -28,7 +28,8 @@ const DashBoard = () => {
         {wishList : <WishList />},
         {setting : <Setting />},
         {enrolledCourses : <EnrolledCourses />},
-        {addCourses : <AddCourses />}
+        {addCourses : <AddCourses />},
+        {forgetPassword : <ForgotPassword />}
       ]
     )
 
@@ -126,27 +127,15 @@ const DashBoard = () => {
 
           <li
             className={`p-2 w-full text-center hover:bg-gray-100 cursor-pointer ${
-              currentComponent === "setting"
+              currentComponent === "forgetPassword"
                 ? "bg-gray-50  border-green-400 border-r-4"
                 : ""
             }`}
-            onClick={() => navigate("/forgot-password")}
+            onClick={() => setCurrentComponent("forgetPassword")}
           >
             <HiOutlineCog className='inline-block mr-2' />
             Forget Password
           </li>
-
-          {/* <li
-            className={`p-2 w-full text-center hover:bg-gray-100 cursor-pointer ${
-              currentComponent === "setting"
-                ? "bg-gray-50  border-green-400 border-r-4"
-                : ""
-            }`}
-            onClick={() => setCurrentComponent("setting")}
-          >
-            <HiOutlineCog className='inline-block mr-2' />
-            Update Password
-          </li> */}
 
           <li
             className='p-2 w-full text-center hover:bg-gray-100 cursor-pointer'

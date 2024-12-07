@@ -17,13 +17,12 @@ const ForgotPassword = () => {
    const dispatch = useDispatch();
    const  {loading}  = useSelector(store => store.user);
 
-   console.log(loading)
   
   const resetPassword = async(e) => {
     e.preventDefault();
      try {
         dispatch(setLoading(true));
-        const res = await axiosInstance.post(FORGOT_PASSWORD , email);
+        const res = await axiosInstance.post(FORGOT_PASSWORD , {email});
         console.log(res)
         setIsOtpSent(res.data.success);
         toast.success("Password reset link sent");
@@ -76,7 +75,9 @@ const ForgotPassword = () => {
 
         <div className='form-container flex gap-3'>
           <form
-            className={`flex gap-3 flex-col w-[50%] ${(isOtpSent || isOtpVerified ) && "hidden"}`}
+            className={`flex gap-3 flex-col w-[50%] ${
+              (isOtpSent || isOtpVerified) && "hidden"
+            }`}
             onSubmit={resetPassword}
           >
             <label htmlFor='email'>Email Address</label>
@@ -89,11 +90,36 @@ const ForgotPassword = () => {
             />
             <button
               type='submit'
-              className={`p-2 text-white font-semibold text-sm rounded-md bg-yellow-500 ${
-                loading ? "cursor-not-allowed opacity-0.5" : ""
+              className={`bg-green-500 hover:bg-green-600 w-[200px] p-3 rounded-lg text-sm font-bold text-white shadow-md transition-all transform hover:scale-[1.02] ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              {loading ? "sending..." : "Reset Password"}
+              {loading ? (
+                <div className='flex items-center justify-center'>
+                  <svg
+                    className='animate-spin h-5 w-5 mr-2'
+                    viewBox='0 0 24 24'
+                  >
+                    <circle
+                      className='opacity-25'
+                      cx='12'
+                      cy='12'
+                      r='10'
+                      stroke='currentColor'
+                      strokeWidth='4'
+                      fill='none'
+                    ></circle>
+                    <path
+                      className='opacity-75'
+                      fill='currentColor'
+                      d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                    ></path>
+                  </svg>
+                  Sending...
+                </div>
+              ) : (
+                "Reset Password"
+              )}
             </button>
           </form>
 

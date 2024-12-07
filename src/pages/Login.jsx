@@ -68,13 +68,13 @@ const Login = () => {
             <div className='w-full flex gap-2 justify-end'>
               <Link
                 to='/signup'
-                className='underline text-xl text-gray-400 hover:text-green-500 transition-colors duration-300'
+                className='underline text-sm font-semibold text-blue-400 hover:text-green-500 transition-colors duration-300'
               >
                 New user
               </Link>
               <Link
                 to='/forgot-password'
-                className='underline text-xl text-gray-400 hover:text-green-500 transition-colors duration-300'
+                className='underline text-sm text-blue-400 font-semibold hover:text-green-500 transition-colors duration-300'
               >
                 Forgot Password
               </Link>

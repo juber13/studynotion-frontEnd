@@ -2,7 +2,7 @@ import { Suspense, useState } from 'react'
 import { lazy } from 'react'
 import Header from './components/Header'
 import Hero from './components/Home'
-import { BrowserRouter, Routes , Route, createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { BrowserRouter, Routes , Route, createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import Contact from './pages/Contact'
 // import About from './pages/About'
 
@@ -16,10 +16,13 @@ import Home from './components/Home'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import DashBoard from './pages/DashBoard'
 import CourseDetail from './pages/CourseDetail'
-
+import { useSelector } from 'react-redux'
 const Login = lazy(() => import('./pages/Login'));
 
+
 function App() {
+    // const userInfo = useSelector((state) => state.user.data);
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,8 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
+        element: (<Suspense fallback={<div>Loading...</div>}>
             <Login />
           </Suspense>
         ),

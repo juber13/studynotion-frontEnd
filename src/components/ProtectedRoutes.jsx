@@ -10,9 +10,10 @@ const ProtectedRoutes = ({ children }) => {
   // const token = Cookie.get("token");  
   if (userInfo == null) {
     return <Navigate to="/login" state={{ from: location }} replace />;
-  } 
+  }
 
   return <>{children}</>;
+
 
 }
 

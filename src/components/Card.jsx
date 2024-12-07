@@ -1,9 +1,15 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom' 
 
 const Card = ({course}) => { 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [arr] = useState(Array.from({length: 5}).fill(0));
+  const [rating, setRating] = useState(0);
+
+  const handleStarValue = (value) => {
+    setRating(value);
+  }
 
   return (
     <div
@@ -27,11 +33,14 @@ const Card = ({course}) => {
       </div>
 
       <div className='p-4'>
-        <div className='flex justify-between items-center'>
+        <div className='flex items-center justify-between'>
           <span className='text-xl font-semibold text-indigo-600'>
             ₹{course.coursePrice}
           </span>
-          <span className='text-sm text-gray-500'>{course.courseDuration}</span>
+
+          <span className='text-sm text-gray-500'>
+            {course.courseDuration}
+          </span>
         </div>
 
         <div className='flex items-center gap-2 text-gray-600 mt-2'>

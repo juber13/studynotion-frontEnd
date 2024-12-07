@@ -14,15 +14,19 @@ import { createSlice } from "@reduxjs/toolkit";
       setUser: (state, action) => {
         state.data = action.payload;
       },
+
       setLoading: (state, action) => {
         state.loading = action.payload;
       },
+
       setIsupdated: (state, action) => {
         state.isUpdatedSomething = action.payload;
       },
+
       setError: (state, action) => {
         state.error = action.payload;
       },
+      
       setLogout: (state, action) => {
         state.data = null;
         state.loading = false;

@@ -95,8 +95,7 @@ const Profile = () => {
                       handleFileChange(e);
                       const fileName =
                         e.target.files[0]?.name || "No file chosen";
-                      document.getElementById("image-file").textContent =
-                        fileName;
+                        document.getElementById("image-file").textContent = fileName;
                     }}
                   />
                   Choose image
@@ -186,7 +185,7 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className='user-info flex justify-between items-center border-2 rounded-xl border-green-200 bg-white p-6 shadow-lg hover:shadow-xl transition-shadow duration-300'>
+            <div className='user-info flex justify-between items-center border-2 rounded-xl border-green-200 bg-white p-6 shadow-md hover:shadow-xl transition-shadow duration-300'>
               <div className='user-name space-y-3'>
                 <h2 className='text-lg'>
                   <span className='font-semibold'>Full Name : </span>{" "}
@@ -208,7 +207,7 @@ const Profile = () => {
               </button>
             </div>
 
-            <div className='about flex items-center justify-between border-2 rounded-xl border-green-200 bg-white p-6 shadow-lg hover:shadow-xl transition-shadow duration-300'>
+            <div className='about flex items-center justify-between border-2 rounded-xl border-green-200 bg-white p-6 shadow-md  hover:shadow-xl transition-shadow duration-300'>
               <div className='space-y-4'>
                 <div>
                   <h2 className='text-lg'>
@@ -235,7 +234,7 @@ const Profile = () => {
               </button>
             </div>
 
-            <div className='personal-details flex items-center justify-between border-2 rounded-xl border-green-200 bg-white p-6  shadow-lg hover:shadow-xl transition-shadow duration-300'>
+            <div className='personal-details flex items-center justify-between border-2 rounded-xl border-green-200 bg-white p-6  shadow-md hover:shadow-xl transition-shadow duration-300'>
               <div className='space-y-3'>
                 <p className='text-lg'>
                   <span className='font-semibold'>Phone Number:</span>{" "}
